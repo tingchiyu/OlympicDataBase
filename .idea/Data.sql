@@ -14,21 +14,21 @@ commit;
 
 
 CREATE TABLE Country
-    (name CHAR(20) NOT NULL PRIMARY KEY ,
+    (name VARCHAR(20) NOT NULL PRIMARY KEY ,
     gold INTEGER,
     silver INTEGER,
     bronze INTEGER,
     isHost_flag BIT);
 
 CREATE TABLE Venue
-  (vname CHAR(30) NOT NULL PRIMARY KEY,
-   location CHAR(30),
+  (vname VARCHAR(30) NOT NULL PRIMARY KEY,
+   location VARCHAR(30),
    capacity INTEGER,
-   size CHAR(20));
+   size VARCHAR(20));
 
 CREATE TABLE Medal
   (type CHAR(1) NOT NULL,
-   stname CHAR(30) NOT NULL,
+   stname VARCHAR(30) NOT NULL,
    athleteid INTEGER,
    groupid INTEGER,
    PRIMARY KEY(type, stname),
@@ -44,10 +44,10 @@ CREATE TABLE Medal
 
 CREATE TABLE Athlete
    (athleteid INTEGER NOT NULL PRIMARY KEY,
-   countryname CHAR(20),
-   sport_category CHAR(30),
-   name CHAR(20) NOT NULL,
-   sex CHAR(6),
+   countryname VARCHAR(20),
+   sport_category VARCHAR(30),
+   name VARCHAR(20) NOT NULL,
+   sex VARCHAR(6),
    height INTEGER,
    weight INTEGER,
    date_of_birth DATE,
@@ -56,9 +56,9 @@ CREATE TABLE Athlete
 
 CREATE TABLE Group
   (groupid INTEGER NOT NULL PRIMARY KEY,
-   countryname CHAR(20) NOT NULL,
-   sport_category CHAR(30),
-   sex CHAR(6),
+   countryname VARCHAR(20) NOT NULL,
+   sport_category VARCHAR(30),
+   sex VARCHAR(6),
    FOREIGN KEY(countryName) REFERENCES Country
    ON UPDATE CASCADE);
 
@@ -74,7 +74,7 @@ CREATE TABLE In_Group
    ON UPDATE CASCADE);
 
 CREATE TABLE Ind_Participate
-  (eventname CHAR(30) NOT NULL,
+  (eventname VARCHAR(30) NOT NULL,
   athleteid INTEGER NOT NULL,
   performance INTEGER,
   PRIMARY KEY(eventname, athleteid),
@@ -85,7 +85,7 @@ CREATE TABLE Ind_Participate
   ON UPDATE CASCADE);
 
 CREATE TABLE Group_Participate
-  (eventname CHAR(30) NOT NULL,
+  (eventname VARCHAR(30) NOT NULL,
   groupid INTEGER NOT NULL,
   performance INTEGER,
   PRIMARY KEY(eventname, groupid),
@@ -96,8 +96,8 @@ CREATE TABLE Group_Participate
   ON UPDATE CASCADE);
 
 CREATE TABLE Event
-  (eventname CHAR(30) NOT NULL PRIMARY KEY,
-  stname CHAR(30),
+  (eventname VARCHAR(30) NOT NULL PRIMARY KEY,
+  stname VARCHAR(30),
   date DATE,
   isfinal_flag BIT,
   FOREIGN KEY(stname) REFERENCES Sport_type
@@ -105,17 +105,17 @@ CREATE TABLE Event
   ON UPDATE CASCADE);
 
 CREATE TABLE Sport_Type
-  (stname CHAR(30) NOT NULL PRIMARY KEY,
-  sport_category CHAR(30),
-  vname CHAR(30),
+  (stname VARCHAR(30) NOT NULL PRIMARY KEY,
+  sport_category VARCHAR(30),
+  vname VARCHAR(30),
   FOREIGN KEY(vname) REFERENCES Venue
   ON DELETE SET NULL
   ON UPDATE CASCADE);
 
 CREATE TABLE Highlight
   (hlid INTEGER NOT NULL,
-  eventname CHAR(30) NOT NULL,
-  description CHAR(100),
+  eventname VARCHAR(30) NOT NULL,
+  description VARCHAR(100),
   PRIMARY KEY(hlid, eventname),
   FOREIGN KEY(eventname) REFERENCES Event
   ON DELETE CASCADE
